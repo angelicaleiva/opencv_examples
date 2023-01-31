@@ -3,5 +3,4 @@
 
 ## Color tracker:
 
-A python implementation for color detection and drawing in a video stream.
-The code uses OpenCV (cv2) to perform operations such as color space conversion, contour detection, and drawing. The code opens a video capture object on the specified channel and continues to read frames until the stream runs out of frames or the user presses 'q' on the keyboard. At each iteration, the code detects colors and contours in the frame, draws them on the frame, and displays the output.
+A Python implementation for detecting colors in a video stream. Uses OpenCV (cv2) for tasks such as color space conversion, contour detection, and drawing. Opens a video capture object and reads frames until the stream ends or the user presses "q". At each iteration, it detects colors and contours, draws them on the frame, and displays the output.

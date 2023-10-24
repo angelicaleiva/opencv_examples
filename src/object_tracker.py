@@ -1,12 +1,24 @@
+"""
+object_tracker.py
+-----------------
+This script uses the YOLO5 model to perform object tracking in real-time video.
+"""
+
 import cv2
 import torch
 import numpy as np
+import logging
 from torch import hub
 
+logging.basicConfig(level=logging.INFO)
 
 class ObjectDetection:
     """
     Class implements Yolo5 model to make inferences on a webcam using Opencv.
+    Usage Example:
+    --------------
+    detector = ObjectDetection(channel)
+    detector.detect_objects()
     """
 
     def __init__(self, channel):
@@ -94,36 +106,46 @@ class ObjectDetection:
         This function is called when class is executed, it runs the loop to read the video frame by frame,
         and show output.
         :return: void
-        """
-    
-        # Open the video stream
-        capture = cv2.VideoCapture(self.channel)
+        """    
+        try:
+            # Open the video stream
+            capture = cv2.VideoCapture(self.channel)
+            if not capture.isOpened():
+                raise Exception("Could not open video device")
+
         
-        # Keep looping while there are frames left in the stream
-        while capture.isOpened():
-            # Read the next frame
-            ret, frame = capture.read()
-            if not ret:
-                break
+            # Keep looping while there are frames left in the stream
+            while capture.isOpened():
+                # Read the next frame
+                ret, frame = capture.read()
+                if not ret:
+                    break
             
-            # Get the model predictions for this frame
-            results = self.score_frame(frame)
+                # Get the model predictions for this frame
+                results = self.score_frame(frame)
+                
+                # Plot the boxes and labels on the frame
+                frame_with_boxes = self.plot_boxes(results, frame)
             
-            # Plot the boxes and labels on the frame
-            frame_with_boxes = self.plot_boxes(results, frame)
+                # Visualize the frame
+                cv2.imshow('frame', frame_with_boxes)
+                
+                # Check if the user has pressed the "q" key to stop the video
+                if (cv2.waitKey(1) & 0xff == ord('q')):
+                    break
+        
+        except Exception as e:
+            logging.error(f"An error occurred: {e}")
             
-            # Visualize the frame
-            cv2.imshow('frame', frame_with_boxes)
-            
-            # Check if the user has pressed the "q" key to stop the video
-            if (cv2.waitKey(1) & 0xff == ord('q')):
-                break
+        finally:
+            # Clean up
+            capture.release()
+            cv2.destroyAllWindows()
 
-        # Clean up
-        capture.release()
-        cv2.destroyAllWindows()
 
+# Adjust these parameters according to your needs
+CHANNEL = 0  # Webcam channel
 
-person_detector = ObjectDetection(0)
+person_detector = ObjectDetection(CHANNEL)
 with torch.no_grad():
     person_detector()

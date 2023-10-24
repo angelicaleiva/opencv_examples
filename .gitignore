@@ -1,0 +1,51 @@
+# .gitignore file for Python and OpenCV projects
+
+# ----- Pytorch Models -----
+*.pt
+
+# ----- Python-related ignores -----
+# Byte-compiled files
+__pycache__/
+*.py[cod]
+
+# Distribution / packaging
+*.egg-info/
+dist/
+
+# ----- Virtual Environment -----
+# Standard directory names for Python virtual environments
+venv/
+env/
+.env/
+
+# ----- IDE and Editor Files -----
+# PyCharm IDE
+.idea/
+*.iml
+
+# Visual Studio Code
+.vscode/
+
+# ----- Temporary Files -----
+# General temp files
+*.tmp
+*.temp
+
+# Vim swap files
+*.swp
+
+# ----- System Files -----
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# ----- Log Files -----
+*.log
+
+
+
+
+
+

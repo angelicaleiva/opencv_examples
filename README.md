@@ -34,9 +34,9 @@ object_tracker.py: This script uses the YOLO5 model to perform object tracking.
 
 Navigate to the `src/` directory:
 
-\```bash
+```bash
 cd src/
-\```
+```
 
 To perform color tracking:
 ```python
@@ -62,9 +62,9 @@ This repository contains two different methods for object tracking:
 
 To run the unit tests, execute the following command from the root directory of the project:
 
-\```bash
+```bash
 python -m unittest tests/test_color_classes.py
-\```
+```
 
 ## Contribution
 To contribute, please fork the repository and create a Pull Request.
